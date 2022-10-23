@@ -1,7 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
-def get_drver():
+service = Service('C:\\Users\\fcunh\\PycharmProjects\\selenium-webscraping\\drivers\\chromedriver.exe')
+def get_driver():
     options = webdriver.ChromeOptions()
     options.add_argument("disable-infobars")
     options.add_argument("start-maximized")
@@ -10,14 +11,15 @@ def get_drver():
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_argument("disable-blink-features=AutomationControlled")
 
-    drver = webdriver.Chrome(options=options)
-    drver.get("http://automated.pythonanywhere.com")
+    driver = webdriver.Chrome(service=service, options=options)
+    driver.get("http://automated.pythonanywhere.com")
 
-    return drver
+    return driver
 
 def main():
-    driver = get_drver()
+    driver = get_driver()
     element = driver.find_element('xpath', '/html/body/div[1]/div/h1[1]')
     return element.text
+
 
 print(main())
